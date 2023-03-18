@@ -46,7 +46,7 @@ internal class Program
             Console.WriteLine("[1] - Inserir Contato");
             Console.WriteLine("[2] - Editar Contato");
             Console.WriteLine("[3] - Remover Contato");
-            Console.WriteLine("[4] - Imprimir Lista de Contatos");
+            Console.WriteLine("[4] - Imprimir Agenda de Contatos");
             Console.WriteLine("[5] - Sair\n");
             Console.Write("Escolha uma opção: ");
             int option = int.Parse(Console.ReadLine());
@@ -145,7 +145,7 @@ internal class Program
             Console.Clear();
             foreach (Contact x in phonebook)
             {
-                Console.WriteLine(x);
+                Console.WriteLine(x.ToString());
             }
         }
 
