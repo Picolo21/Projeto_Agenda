@@ -140,7 +140,7 @@ internal class Program
             return null;
         }
 
-        void PrintContacts()
+        void PrintAllContacts()
         {
             Console.Clear();
             foreach (Contact x in phonebook)
@@ -196,5 +196,7 @@ internal class Program
             int option = int.Parse(Console.ReadLine());
             return option;
         }
+
+
     }
 }
