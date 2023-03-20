@@ -1,4 +1,6 @@
-﻿namespace Projeto_Agenda.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Projeto_Agenda.Entities
 {
     internal class Contact
     {
