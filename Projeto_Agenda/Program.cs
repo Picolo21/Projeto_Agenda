@@ -1,4 +1,5 @@
 ﻿using Projeto_Agenda.Entities;
+using System.Numerics;
 
 internal class Program
 {
@@ -6,7 +7,7 @@ internal class Program
     {
         Console.Title = "Agenda de Contatos";
 
-        List<Contact> phonebook = new List<Contact>();
+        List<Contact> phoneBook = new List<Contact>();
         int op;
 
         do
@@ -15,13 +16,13 @@ internal class Program
             switch (op)
             {
                 case 1:
-                    phonebook.Add(InsertContact());
+                    phoneBook.Add(InsertContact());
                     break;
                 case 2:
                     EditContact();
                     break;
                 case 3:
-                    phonebook.Remove(RemoveContact());
+                    phoneBook.Remove(RemoveContact());
                     break;
                 case 4:
                     Print();
@@ -73,7 +74,7 @@ internal class Program
             Console.Write("Digite o nome do contato que deseja editar: ");
             string name = Console.ReadLine();
             Console.WriteLine();
-            foreach (Contact x in phonebook)
+            foreach (Contact x in phoneBook)
             {
                 if (x.Name.Equals(name))
                 {
@@ -130,7 +131,7 @@ internal class Program
             PrintAllContacts();
             Console.Write("Digite o nome do contato que deseja excluir: ");
             string name = Console.ReadLine();
-            foreach (Contact x in phonebook)
+            foreach (Contact x in phoneBook)
             {
                 if (x.Name.Equals(name))
                 {
@@ -191,30 +192,57 @@ internal class Program
 
         void Print()
         {
-            int op = PrintMenu();
-            switch(op)
+            do
             {
-                case 1:
-                    PrintAllContacts();
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-
-                    break;
-                case 4:
-                    break;
-                default:
-                    InvalidOption();
-                    break;
-            }
+                int op = PrintMenu();
+                switch (op)
+                {
+                    case 1:
+                        PrintAllContacts();
+                        break;
+                    case 2:
+                        PrintInAlphabeticalOrder();
+                        break;
+                    case 3:
+                        PrintPhoneBookByLetter();
+                        break;
+                    case 4:
+                        break;
+                    default:
+                        InvalidOption();
+                        break;
+                }
+            } while (op != 4);
         }
 
         void PrintAllContacts()
         {
             Console.Clear();
-            foreach (Contact x in phonebook)
+            foreach (Contact x in phoneBook)
+            {
+                Console.WriteLine(x.ToString());
+            }
+        }
+
+        void PrintInAlphabeticalOrder()
+        {
+            Console.Clear();
+            List<Contact> sortedPhoneBook = new List<Contact>();
+            sortedPhoneBook = phoneBook.OrderBy(x => x.Name).ToList();
+            foreach (Contact x in sortedPhoneBook)
+            {
+                Console.WriteLine(x.ToString());
+            }
+        }
+
+        void PrintPhoneBookByLetter()
+        {
+            Console.Clear();
+            List<Contact> PhoneBookByLetter = new List<Contact>();
+            Console.Write("Escolha uma letra para imprimir a lista: ");
+            char choice = char.Parse(Console.ReadLine());
+            PhoneBookByLetter = phoneBook.OrderBy(x => x.Name[0] == choice).ToList();
+            foreach (Contact x in PhoneBookByLetter)
             {
                 Console.WriteLine(x.ToString());
             }
