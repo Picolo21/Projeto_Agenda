@@ -24,7 +24,7 @@ internal class Program
                     phonebook.Remove(RemoveContact());
                     break;
                 case 4:
-                    PrintContacts();
+                    PrintMenu();
                     do
                     {
                         Console.WriteLine("Aperte ENTER para voltar ao MENU DE OPÇÕES");
@@ -194,6 +194,7 @@ internal class Program
             Console.WriteLine("[4] - Retornar ao Menu Principal\n");
             Console.Write("Escolha a opção que deseja editar no contato selecionado: ");
             int option = int.Parse(Console.ReadLine());
+            return option;
         }
     }
 }
