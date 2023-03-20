@@ -253,10 +253,6 @@ internal class Program
             {
                 Console.Write(x.ToString() + "\n");
             }
-            do
-            {
-                Console.WriteLine("Aperte ENTER para voltar ao MENU DE OPÇÕES");
-            } while (Console.ReadKey().Key != ConsoleKey.Enter);
         }
     }
 }
