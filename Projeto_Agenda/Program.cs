@@ -24,7 +24,7 @@ internal class Program
                     phonebook.Remove(RemoveContact());
                     break;
                 case 4:
-                    PrintMenu();
+                    Print();
                     do
                     {
                         Console.WriteLine("Aperte ENTER para voltar ao MENU DE OPÇÕES");
@@ -69,7 +69,7 @@ internal class Program
         void EditContact()
         {
             Console.Clear();
-            PrintContacts();
+            PrintAllContacts();
             Console.Write("Digite o nome do contato que deseja editar: ");
             string name = Console.ReadLine();
             Console.WriteLine();
@@ -127,7 +127,7 @@ internal class Program
         Contact RemoveContact()
         {
             Console.Clear();
-            PrintContacts();
+            PrintAllContacts();
             Console.Write("Digite o nome do contato que deseja excluir: ");
             string name = Console.ReadLine();
             foreach (Contact x in phonebook)
@@ -140,14 +140,6 @@ internal class Program
             return null;
         }
 
-        void PrintAllContacts()
-        {
-            Console.Clear();
-            foreach (Contact x in phonebook)
-            {
-                Console.WriteLine(x.ToString());
-            }
-        }
 
         void Exit()
         {
@@ -189,7 +181,7 @@ internal class Program
             Console.Clear();
             Console.WriteLine("MENU DE OPÇÕES PARA IMPRESSÃO\n");
             Console.WriteLine("[1] - Imprimir todos os contatos");
-            Console.WriteLine("[2] - Imprimir contatos por ordem alfabética");
+            Console.WriteLine("[2] - Imprimir todos os contatos por ordem alfabética");
             Console.WriteLine("[3] - Imprimir contatos por letra escolhida");
             Console.WriteLine("[4] - Retornar ao Menu Principal\n");
             Console.Write("Escolha a opção que deseja editar no contato selecionado: ");
@@ -197,6 +189,35 @@ internal class Program
             return option;
         }
 
+        void Print()
+        {
+            int op = PrintMenu();
+            switch(op)
+            {
+                case 1:
+                    PrintAllContacts();
+                    break;
+                case 2:
 
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+                    break;
+                default:
+                    InvalidOption();
+                    break;
+            }
+        }
+
+        void PrintAllContacts()
+        {
+            Console.Clear();
+            foreach (Contact x in phonebook)
+            {
+                Console.WriteLine(x.ToString());
+            }
+        }
     }
 }
