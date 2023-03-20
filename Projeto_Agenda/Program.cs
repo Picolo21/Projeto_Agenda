@@ -105,7 +105,7 @@ internal class Program
                                 x.LivesAt.EditCity();
                                 break;
                             case 8:
-                                x.LivesAt.EditStreet();
+                                x.LivesAt.EditState();
                                 break;
                             case 9:
                                 x.LivesAt.EditPostalCode();
