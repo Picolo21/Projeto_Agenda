@@ -1,5 +1,4 @@
 ﻿using Projeto_Agenda.Entities;
-using System.Numerics;
 
 internal class Program
 {
