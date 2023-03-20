@@ -183,5 +183,17 @@ internal class Program
             int option = int.Parse(Console.ReadLine());
             return option;
         }
+
+        int PrintMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("MENU DE OPÇÕES PARA IMPRESSÃO\n");
+            Console.WriteLine("[1] - Imprimir todos os contatos");
+            Console.WriteLine("[2] - Imprimir contatos por ordem alfabética");
+            Console.WriteLine("[3] - Imprimir contatos por letra escolhida");
+            Console.WriteLine("[4] - Retornar ao Menu Principal\n");
+            Console.Write("Escolha a opção que deseja editar no contato selecionado: ");
+            int option = int.Parse(Console.ReadLine());
+        }
     }
 }
