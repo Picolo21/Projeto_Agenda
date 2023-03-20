@@ -238,14 +238,25 @@ internal class Program
         void PrintPhoneBookByLetter()
         {
             Console.Clear();
-            List<Contact> PhoneBookByLetter = new List<Contact>();
+            List<Contact> phoneBookByLetter = new List<Contact>();
             Console.Write("Escolha uma letra para imprimir a lista: ");
-            char choice = char.Parse(Console.ReadLine());
-            PhoneBookByLetter = phoneBook.OrderBy(x => x.Name[0] == choice).ToList();
-            foreach (Contact x in PhoneBookByLetter)
+            char choice = char.Parse(Console.ReadLine().ToLower());
+            Console.Clear();
+            foreach (Contact x in phoneBook)
             {
-                Console.WriteLine(x.ToString());
+                if (x.Name.ToLower()[0] == choice)
+                {
+                    phoneBookByLetter.Add(x);
+                }
             }
+            foreach (Contact x in phoneBookByLetter)
+            {
+                Console.Write(x.ToString() + "\n");
+            }
+            do
+            {
+                Console.WriteLine("Aperte ENTER para voltar ao MENU DE OPÇÕES");
+            } while (Console.ReadKey().Key != ConsoleKey.Enter);
         }
     }
 }
