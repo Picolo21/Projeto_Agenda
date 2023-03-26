@@ -45,7 +45,7 @@ internal class Program
             switch (op)
             {
                 case 1:
-                    phoneBook.Add(InsertContact());
+                    phoneBook.Add(InsertContact(pathContacts));
                     break;
                 case 2:
                     EditContact(phoneBook);
@@ -73,7 +73,7 @@ internal class Program
         } while (op != 6);
     }
 
-    private static Contact InsertContact()
+    private static void InsertContact(string path)
     {
         Console.Clear();
         Console.Write("Digite o nome do novo contato: ");
@@ -82,7 +82,10 @@ internal class Program
         string phone = Console.ReadLine();
         Console.WriteLine();
         Contact contact = new Contact(name, phone);
-        return contact;
+        using (StreamWriter sw = File.AppendText(path))
+        {
+            sw.WriteLine(contact.ToString());
+        }
     }
 
     private static void EditContact(List<Contact> phoneBook)

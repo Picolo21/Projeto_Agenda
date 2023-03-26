@@ -67,6 +67,11 @@
             Email = email;
         }
 
+        public string ToStringFile()
+        {
+            return $"{Name};{Phone};{Email};{LivesAt.Street};{LivesAt.City};{LivesAt.State};{LivesAt.PostalCode};{LivesAt.Country}";
+        }
+
         public override string ToString()
         {
             return $"Nome: {Name}\nTelefone: {Phone}\n{LivesAt.ToString()}";
