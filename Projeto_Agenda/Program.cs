@@ -201,18 +201,22 @@ internal class Program
     private static int EditMenu()
     {
         Console.Clear();
-        Console.WriteLine("MENU DE OPÇÕES PARA EDIÇÃO\n");
-        Console.WriteLine("[1] - Editar todos os dados do contato");
-        Console.WriteLine("[2] - Editar todos os dados de endereço do contato");
-        Console.WriteLine("[3] - Editar Nome");
-        Console.WriteLine("[4] - Editar Telefone");
-        Console.WriteLine("[5] - Editar E-mail");
-        Console.WriteLine("[6] - Editar Endereço");
-        Console.WriteLine("[7] - Editar Cidade");
-        Console.WriteLine("[8] - Editar Estado");
-        Console.WriteLine("[9] - Editar CEP");
-        Console.WriteLine("[10] - Editar País");
-        Console.WriteLine("[11] - Retornar ao Menu Principal\n");
+        Console.WriteLine("------------------------------------------------------------------");
+        Console.WriteLine("|                   MENU DE OPÇÕES PARA EDIÇÃO".PadRight(65) + "|");
+        Console.WriteLine("|".PadRight(65) + "|");
+        Console.WriteLine("|   [1] ".PadRight(9) + "- Editar todos os dados do contato".PadRight(56) + "|");
+        Console.WriteLine("|   [2] ".PadRight(9) + "- Editar todos os dados de endereço do contato".PadRight(56) + "|");
+        Console.WriteLine("|   [3] ".PadRight(9) + "- Editar Nome".PadRight(56) + "|");
+        Console.WriteLine("|   [4] ".PadRight(9) + "- Editar Telefone".PadRight(56) + "|");
+        Console.WriteLine("|   [5] ".PadRight(9) + "- Editar E-mail".PadRight(56) + "|");
+        Console.WriteLine("|   [6] ".PadRight(9) + "- Editar Endereço".PadRight(56) + "|");
+        Console.WriteLine("|   [7] ".PadRight(9) + "- Editar Cidade".PadRight(56) + "|");
+        Console.WriteLine("|   [8] ".PadRight(9) + "- Editar Estado".PadRight(56) + "|");
+        Console.WriteLine("|   [9] ".PadRight(9) + "- Editar CEP".PadRight(56) + "|");
+        Console.WriteLine("|   [10] ".PadRight(9) + "- Editar País".PadRight(56) + "|");
+        Console.WriteLine("|   [11] ".PadRight(9) + "- Retornar ao Menu Principal".PadRight(56) + "|");
+        Console.WriteLine("|".PadRight(65) + "|");
+        Console.WriteLine("------------------------------------------------------------------\n");
         Console.Write("Escolha a opção que deseja editar no contato selecionado: ");
         int option = int.Parse(Console.ReadLine());
         return option;
