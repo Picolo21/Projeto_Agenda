@@ -14,6 +14,18 @@
             LivesAt = new Address();
         }
 
+        public Contact(string name, string phone, string email, string street, string city, string state, string postalCode, string country)
+        {
+            Name = name;
+            Phone = phone;
+            Email = email;
+            LivesAt.Street = street;
+            LivesAt.City = city;
+            LivesAt.State = state;
+            LivesAt.PostalCode = postalCode;
+            LivesAt.Country = country;
+        }
+
         public void EditAll()
         {
             Console.Clear();
