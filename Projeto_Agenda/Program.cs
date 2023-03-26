@@ -45,7 +45,7 @@ internal class Program
             switch (op)
             {
                 case 1:
-                    phoneBook.Add(InsertContact(pathContacts));
+                    InsertContact(pathContacts);
                     break;
                 case 2:
                     EditContact(phoneBook);
@@ -84,7 +84,7 @@ internal class Program
         Contact contact = new Contact(name, phone);
         using (StreamWriter sw = File.AppendText(path))
         {
-            sw.WriteLine(contact.ToString());
+            sw.WriteLine(contact.ToStringFile());
         }
     }
 
