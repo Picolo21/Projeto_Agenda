@@ -2,9 +2,39 @@
 
 internal class Program
 {
+    private static int Menu()
+    {
+        Console.Clear();
+        Console.WriteLine("---------------------------------------------------------");
+        Console.WriteLine("|".PadRight(56) + "|");
+        Console.WriteLine("|\t\t   MENU DE OPÇÕES\t\t        |");
+        Console.WriteLine("|".PadRight(56) + "|");
+        Console.WriteLine("|\t[1] - Inserir Contato".PadRight(50) + "|");
+        Console.WriteLine("|\t[2] - Editar Contato".PadRight(50) + "|");
+        Console.WriteLine("|\t[3] - Bloquear Contato".PadRight(50) + "|");
+        Console.WriteLine("|\t[3] - Remover Contato".PadRight(50) + "|");
+        Console.WriteLine("|\t[4] - Imprimir Contatos".PadRight(50) + "|");
+        Console.WriteLine("|\t[6] - Sair".PadRight(50) + "|");
+        Console.WriteLine("|".PadRight(56) + "|");
+        Console.WriteLine("---------------------------------------------------------");
+
+        Console.WriteLine();
+        Console.Write("Escolha uma opção: ");
+        int option = int.Parse(Console.ReadLine());
+        Console.WriteLine();
+        return option;
+    }
+
     private static void Main(string[] args)
     {
         Console.Title = "Agenda de Contatos";
+
+        string contacts = "Contatos.txt";
+        string blockedContacts = "Contatos Bloqueados.txt";
+        string path = @"C:\Users\" + Environment.UserName + @"\";
+
+        string pathContacts = path + contacts;
+        string pathBlockedContacts = path + blockedContacts;
 
         List<Contact> phoneBook = new List<Contact>();
         int op;
@@ -38,220 +68,204 @@ internal class Program
                     break;
             }
         } while (op != 5);
+    }
 
-        int Menu()
-        {
-            Console.Clear();
-            Console.WriteLine("MENU DE OPÇÕES\n");
-            Console.WriteLine("[1] - Inserir Contato");
-            Console.WriteLine("[2] - Editar Contato");
-            Console.WriteLine("[3] - Remover Contato");
-            Console.WriteLine("[4] - Imprimir Agenda de Contatos");
-            Console.WriteLine("[5] - Sair\n");
-            Console.Write("Escolha uma opção: ");
-            int option = int.Parse(Console.ReadLine());
-            Console.WriteLine();
-            return option;
-        }
+    private static Contact InsertContact()
+    {
+        Console.Clear();
+        Console.Write("Digite o nome do novo contato: ");
+        string name = Console.ReadLine();
+        Console.Write("Digite o número do novo contato: ");
+        string phone = Console.ReadLine();
+        Console.WriteLine();
+        Contact contact = new Contact(name, phone);
+        return contact;
+    }
 
-        Contact InsertContact()
+    private static void EditContact()
+    {
+        Console.Clear();
+        PrintAllContacts();
+        Console.Write("Digite o nome do contato que deseja editar: ");
+        string name = Console.ReadLine();
+        Console.WriteLine();
+        foreach (Contact x in phoneBook)
         {
-            Console.Clear();
-            Console.Write("Digite o nome do novo contato: ");
-            string name = Console.ReadLine();
-            Console.Write("Digite o número do novo contato: ");
-            string phone = Console.ReadLine();
-            Console.WriteLine();
-            Contact contact = new Contact(name, phone);
-            return contact;
-        }
-
-        void EditContact()
-        {
-            Console.Clear();
-            PrintAllContacts();
-            Console.Write("Digite o nome do contato que deseja editar: ");
-            string name = Console.ReadLine();
-            Console.WriteLine();
-            foreach (Contact x in phoneBook)
+            if (x.Name.Equals(name))
             {
-                if (x.Name.Equals(name))
+                int op;
+                do
                 {
-                    int op;
-                    do
+                    op = EditMenu();
+                    switch (op)
                     {
-                        op = EditMenu();
-                        switch (op)
-                        {
-                            case 1:
-                                x.EditAll();
-                                break;
-                            case 2:
-                                x.LivesAt.EditAllAddress();
-                                break;
-                            case 3:
-                                x.EditName();
-                                break;
-                            case 4:
-                                x.EditPhone();
-                                break;
-                            case 5:
-                                x.EditEmail();
-                                break;
-                            case 6:
-                                x.LivesAt.EditStreet();
-                                break;
-                            case 7:
-                                x.LivesAt.EditCity();
-                                break;
-                            case 8:
-                                x.LivesAt.EditState();
-                                break;
-                            case 9:
-                                x.LivesAt.EditPostalCode();
-                                break;
-                            case 10:
-                                x.LivesAt.EditCountry();
-                                break;
-                            case 11:
-                                break;
-                            default:
-                                InvalidOption();
-                                break;
-                        }
-                    } while (op != 11);
-                }
+                        case 1:
+                            x.EditAll();
+                            break;
+                        case 2:
+                            x.LivesAt.EditAllAddress();
+                            break;
+                        case 3:
+                            x.EditName();
+                            break;
+                        case 4:
+                            x.EditPhone();
+                            break;
+                        case 5:
+                            x.EditEmail();
+                            break;
+                        case 6:
+                            x.LivesAt.EditStreet();
+                            break;
+                        case 7:
+                            x.LivesAt.EditCity();
+                            break;
+                        case 8:
+                            x.LivesAt.EditState();
+                            break;
+                        case 9:
+                            x.LivesAt.EditPostalCode();
+                            break;
+                        case 10:
+                            x.LivesAt.EditCountry();
+                            break;
+                        case 11:
+                            break;
+                        default:
+                            InvalidOption();
+                            break;
+                    }
+                } while (op != 11);
             }
         }
+    }
 
-        Contact RemoveContact()
+    private static Contact RemoveContact()
+    {
+        Console.Clear();
+        PrintAllContacts();
+        Console.Write("Digite o nome do contato que deseja excluir: ");
+        string name = Console.ReadLine();
+        foreach (Contact x in phoneBook)
         {
-            Console.Clear();
-            PrintAllContacts();
-            Console.Write("Digite o nome do contato que deseja excluir: ");
-            string name = Console.ReadLine();
-            foreach (Contact x in phoneBook)
+            if (x.Name.Equals(name))
             {
-                if (x.Name.Equals(name))
-                {
-                    return x;
-                }
-            }
-            return null;
-        }
-
-
-        void Exit()
-        {
-            Console.Clear();
-            Console.WriteLine("Agenda Fechada!");
-        }
-
-        void InvalidOption()
-        {
-            do
-            {
-                Console.Clear();
-                Console.WriteLine("Opção inválida. Por favor aperte ENTER para selecionar novamente uma opção válida");
-            } while (Console.ReadKey().Key != ConsoleKey.Enter);
-        }
-
-        int EditMenu()
-        {
-            Console.Clear();
-            Console.WriteLine("MENU DE OPÇÕES PARA EDIÇÃO\n");
-            Console.WriteLine("[1] - Editar todos os dados do contato");
-            Console.WriteLine("[2] - Editar todos os dados de endereço do contato");
-            Console.WriteLine("[3] - Editar Nome");
-            Console.WriteLine("[4] - Editar Telefone");
-            Console.WriteLine("[5] - Editar E-mail");
-            Console.WriteLine("[6] - Editar Endereço");
-            Console.WriteLine("[7] - Editar Cidade");
-            Console.WriteLine("[8] - Editar Estado");
-            Console.WriteLine("[9] - Editar CEP");
-            Console.WriteLine("[10] - Editar País");
-            Console.WriteLine("[11] - Retornar ao Menu Principal\n");
-            Console.Write("Escolha a opção que deseja editar no contato selecionado: ");
-            int option = int.Parse(Console.ReadLine());
-            return option;
-        }
-
-        int PrintMenu()
-        {
-            Console.Clear();
-            Console.WriteLine("MENU DE OPÇÕES PARA IMPRESSÃO\n");
-            Console.WriteLine("[1] - Imprimir todos os contatos");
-            Console.WriteLine("[2] - Imprimir todos os contatos por ordem alfabética");
-            Console.WriteLine("[3] - Imprimir contatos por letra escolhida");
-            Console.WriteLine("[4] - Retornar ao Menu Principal\n");
-            Console.Write("Escolha a opção que deseja editar no contato selecionado: ");
-            int option = int.Parse(Console.ReadLine());
-            return option;
-        }
-
-        void Print()
-        {
-            do
-            {
-                int op = PrintMenu();
-                switch (op)
-                {
-                    case 1:
-                        PrintAllContacts();
-                        break;
-                    case 2:
-                        PrintInAlphabeticalOrder();
-                        break;
-                    case 3:
-                        PrintPhoneBookByLetter();
-                        break;
-                    case 4:
-                        break;
-                    default:
-                        InvalidOption();
-                        break;
-                }
-            } while (op != 4);
-        }
-
-        void PrintAllContacts()
-        {
-            Console.Clear();
-            foreach (Contact x in phoneBook)
-            {
-                Console.WriteLine(x.ToString());
+                return x;
             }
         }
+        return null;
+    }
 
-        void PrintInAlphabeticalOrder()
+    private static void Exit()
+    {
+        Console.Clear();
+        Console.WriteLine("Agenda Fechada!");
+    }
+
+    private static void InvalidOption()
+    {
+        do
         {
             Console.Clear();
-            List<Contact> sortedPhoneBook = new List<Contact>();
-            sortedPhoneBook = phoneBook.OrderBy(x => x.Name).ToList();
-            foreach (Contact x in sortedPhoneBook)
-            {
-                Console.WriteLine(x.ToString());
-            }
-        }
+            Console.WriteLine("Opção inválida. Por favor aperte ENTER para selecionar novamente uma opção válida");
+        } while (Console.ReadKey().Key != ConsoleKey.Enter);
+    }
 
-        void PrintPhoneBookByLetter()
+    private static int PrintMenu()
+    {
+        Console.Clear();
+        Console.WriteLine("MENU DE OPÇÕES PARA IMPRESSÃO\n");
+        Console.WriteLine("[1] - Imprimir todos os contatos");
+        Console.WriteLine("[2] - Imprimir todos os contatos por ordem alfabética");
+        Console.WriteLine("[3] - Imprimir contatos por letra escolhida");
+        Console.WriteLine("[4] - Retornar ao Menu Principal\n");
+        Console.Write("Escolha a opção que deseja editar no contato selecionado: ");
+        int option = int.Parse(Console.ReadLine());
+        return option;
+    }
+
+    private static int EditMenu()
+    {
+        Console.Clear();
+        Console.WriteLine("MENU DE OPÇÕES PARA EDIÇÃO\n");
+        Console.WriteLine("[1] - Editar todos os dados do contato");
+        Console.WriteLine("[2] - Editar todos os dados de endereço do contato");
+        Console.WriteLine("[3] - Editar Nome");
+        Console.WriteLine("[4] - Editar Telefone");
+        Console.WriteLine("[5] - Editar E-mail");
+        Console.WriteLine("[6] - Editar Endereço");
+        Console.WriteLine("[7] - Editar Cidade");
+        Console.WriteLine("[8] - Editar Estado");
+        Console.WriteLine("[9] - Editar CEP");
+        Console.WriteLine("[10] - Editar País");
+        Console.WriteLine("[11] - Retornar ao Menu Principal\n");
+        Console.Write("Escolha a opção que deseja editar no contato selecionado: ");
+        int option = int.Parse(Console.ReadLine());
+        return option;
+    }
+
+    private static void PrintPhoneBookByLetter()
+    {
+        Console.Clear();
+        List<Contact> phoneBookByLetter = new List<Contact>();
+        Console.Write("Escolha uma letra para imprimir a lista: ");
+        char choice = char.Parse(Console.ReadLine().ToLower());
+        Console.Clear();
+        foreach (Contact x in phoneBook)
         {
-            Console.Clear();
-            List<Contact> phoneBookByLetter = new List<Contact>();
-            Console.Write("Escolha uma letra para imprimir a lista: ");
-            char choice = char.Parse(Console.ReadLine().ToLower());
-            Console.Clear();
-            foreach (Contact x in phoneBook)
+            if (x.Name.ToLower()[0] == choice)
             {
-                if (x.Name.ToLower()[0] == choice)
-                {
-                    phoneBookByLetter.Add(x);
-                }
-            }
-            foreach (Contact x in phoneBookByLetter)
-            {
-                Console.Write(x.ToString() + "\n");
+                phoneBookByLetter.Add(x);
             }
         }
+        foreach (Contact x in phoneBookByLetter)
+        {
+            Console.Write(x.ToString() + "\n");
+        }
+    }
+
+    private static void PrintInAlphabeticalOrder()
+    {
+        Console.Clear();
+        List<Contact> sortedPhoneBook = new List<Contact>();
+        sortedPhoneBook = phoneBook.OrderBy(x => x.Name).ToList();
+        foreach (Contact x in sortedPhoneBook)
+        {
+            Console.WriteLine(x.ToString());
+        }
+    }
+
+    void PrintAllContacts()
+    {
+        Console.Clear();
+        foreach (Contact x in phoneBook)
+        {
+            Console.WriteLine(x.ToString());
+        }
+    }
+
+    void Print()
+    {
+        do
+        {
+            int op = PrintMenu();
+            switch (op)
+            {
+                case 1:
+                    PrintAllContacts();
+                    break;
+                case 2:
+                    PrintInAlphabeticalOrder();
+                    break;
+                case 3:
+                    PrintPhoneBookByLetter();
+                    break;
+                case 4:
+                    break;
+                default:
+                    InvalidOption();
+                    break;
+            }
+        } while (op != 4);
     }
 }
