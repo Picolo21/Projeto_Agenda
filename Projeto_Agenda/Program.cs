@@ -183,11 +183,16 @@ internal class Program
     private static int PrintMenu()
     {
         Console.Clear();
-        Console.WriteLine("MENU DE OPÇÕES PARA IMPRESSÃO\n");
-        Console.WriteLine("[1] - Imprimir todos os contatos");
-        Console.WriteLine("[2] - Imprimir todos os contatos por ordem alfabética");
-        Console.WriteLine("[3] - Imprimir contatos por letra escolhida");
-        Console.WriteLine("[4] - Retornar ao Menu Principal\n");
+        Console.WriteLine("-----------------------------------------------------------------");
+        Console.WriteLine("|".PadRight(64) + "|");
+        Console.WriteLine("|                 MENU DE OPÇÕES PARA IMPRESSÃO".PadRight(64) + "|");
+        Console.WriteLine("|".PadRight(64) + "|");
+        Console.WriteLine("|   " + "[1] - Imprimir todos os contatos".PadRight(60) + "|");
+        Console.WriteLine("|   " + "[2] - Imprimir todos os contatos por ordem alfabética".PadRight(60) + "|");
+        Console.WriteLine("|   " + "[3] - Imprimir contatos por letra escolhida".PadRight(60) + "|");
+        Console.WriteLine("|   " + "[4] - Retornar ao Menu Principal".PadRight(60) + "|");
+        Console.WriteLine("|".PadRight(64) + "|");
+        Console.WriteLine("-----------------------------------------------------------------\n");
         Console.Write("Escolha a opção que deseja editar no contato selecionado: ");
         int option = int.Parse(Console.ReadLine());
         return option;
