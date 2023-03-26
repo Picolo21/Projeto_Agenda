@@ -12,8 +12,8 @@ internal class Program
         Console.WriteLine("|\t[1] - Inserir Contato".PadRight(50) + "|");
         Console.WriteLine("|\t[2] - Editar Contato".PadRight(50) + "|");
         Console.WriteLine("|\t[3] - Bloquear Contato".PadRight(50) + "|");
-        Console.WriteLine("|\t[3] - Remover Contato".PadRight(50) + "|");
-        Console.WriteLine("|\t[4] - Imprimir Contatos".PadRight(50) + "|");
+        Console.WriteLine("|\t[4] - Remover Contato".PadRight(50) + "|");
+        Console.WriteLine("|\t[5] - Imprimir Contatos".PadRight(50) + "|");
         Console.WriteLine("|\t[6] - Sair".PadRight(50) + "|");
         Console.WriteLine("|".PadRight(56) + "|");
         Console.WriteLine("---------------------------------------------------------");
@@ -48,26 +48,29 @@ internal class Program
                     phoneBook.Add(InsertContact());
                     break;
                 case 2:
-                    EditContact();
+                    EditContact(phoneBook);
                     break;
                 case 3:
-                    phoneBook.Remove(RemoveContact());
+                    phoneBook.Remove(RemoveContact(phoneBook));
                     break;
                 case 4:
-                    Print();
+                    Print(phoneBook);
                     do
                     {
                         Console.WriteLine("Aperte ENTER para voltar ao MENU DE OPÇÕES");
                     } while (Console.ReadKey().Key != ConsoleKey.Enter);
                     break;
                 case 5:
+
+                    break;
+                case 6:
                     Exit();
                     break;
                 default:
                     InvalidOption();
                     break;
             }
-        } while (op != 5);
+        } while (op != 6);
     }
 
     private static Contact InsertContact()
@@ -82,10 +85,10 @@ internal class Program
         return contact;
     }
 
-    private static void EditContact()
+    private static void EditContact(List<Contact> phoneBook)
     {
         Console.Clear();
-        PrintAllContacts();
+        PrintAllContacts(phoneBook);
         Console.Write("Digite o nome do contato que deseja editar: ");
         string name = Console.ReadLine();
         Console.WriteLine();
@@ -140,10 +143,10 @@ internal class Program
         }
     }
 
-    private static Contact RemoveContact()
+    private static Contact RemoveContact(List<Contact> phoneBook)
     {
         Console.Clear();
-        PrintAllContacts();
+        PrintAllContacts(phoneBook);
         Console.Write("Digite o nome do contato que deseja excluir: ");
         string name = Console.ReadLine();
         foreach (Contact x in phoneBook)
@@ -204,7 +207,7 @@ internal class Program
         return option;
     }
 
-    private static void PrintPhoneBookByLetter()
+    private static void PrintPhoneBookByLetter(List<Contact> phoneBook)
     {
         Console.Clear();
         List<Contact> phoneBookByLetter = new List<Contact>();
@@ -224,7 +227,7 @@ internal class Program
         }
     }
 
-    private static void PrintInAlphabeticalOrder()
+    private static void PrintInAlphabeticalOrder(List<Contact> phoneBook)
     {
         Console.Clear();
         List<Contact> sortedPhoneBook = new List<Contact>();
@@ -235,7 +238,7 @@ internal class Program
         }
     }
 
-    void PrintAllContacts()
+    private static void PrintAllContacts(List<Contact> phoneBook)
     {
         Console.Clear();
         foreach (Contact x in phoneBook)
@@ -244,21 +247,22 @@ internal class Program
         }
     }
 
-    void Print()
+    private static void Print(List<Contact> phoneBook)
     {
+        int op;
         do
         {
-            int op = PrintMenu();
+            op = PrintMenu();
             switch (op)
             {
                 case 1:
-                    PrintAllContacts();
+                    PrintAllContacts(phoneBook);
                     break;
                 case 2:
-                    PrintInAlphabeticalOrder();
+                    PrintInAlphabeticalOrder(phoneBook);
                     break;
                 case 3:
-                    PrintPhoneBookByLetter();
+                    PrintPhoneBookByLetter(phoneBook);
                     break;
                 case 4:
                     break;
