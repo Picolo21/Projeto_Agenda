@@ -253,7 +253,7 @@ internal class Program
         }
     }
 
-    private static List<Contact> PrintAllContacts(string pathContacts)
+    private static void PrintAllContacts(string pathContacts)
     {
         List<Contact> phoneBooks = new List<Contact>();
 
@@ -267,14 +267,17 @@ internal class Program
                     string[] text = sr.ReadLine().Split(';');
                     phoneBooks.Add(new Contact(text[0], text[1], text[2], text[3], text[4], text[5], text[6], text[7]));
                 } while (!sr.EndOfStream);
-                foreach (Contact x in phoneBooks)
+                do
                 {
-                    Console.WriteLine(x.ToString());
-                }
-                Console.ReadLine();
+                    Console.Clear();
+                    foreach (Contact x in phoneBooks)
+                    {
+                        Console.WriteLine(x.ToString());
+                    }
+                    Console.WriteLine("Aperter ENTER para voltar ao Menu de Impressão");
+                } while (Console.ReadKey().Key != ConsoleKey.Enter);
             }
         }
-        return phoneBooks;
     }
 
     private static void Print(string pathContacts)
@@ -288,11 +291,7 @@ internal class Program
             switch (op)
             {
                 case 1:
-                    phoneBooks = PrintAllContacts(pathContacts);
-                    foreach (Contact x in phoneBooks)
-                    {
-                        Console.WriteLine(x.ToString());
-                    }
+                    PrintAllContacts(pathContacts);
                     break;
                 case 2:
                     //PrintInAlphabeticalOrder();
