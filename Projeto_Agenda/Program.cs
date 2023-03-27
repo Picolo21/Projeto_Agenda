@@ -58,10 +58,6 @@ internal class Program
                     break;
                 case 5:
                     Print(pathContacts);
-                    do
-                    {
-                        Console.WriteLine("Aperte ENTER para voltar ao MENU DE OPÇÕES");
-                    } while (Console.ReadKey().Key != ConsoleKey.Enter);
                     break;
                 case 6:
                     Exit();
@@ -193,7 +189,7 @@ internal class Program
         Console.WriteLine("|   " + "[4] - Retornar ao Menu Principal".PadRight(60) + "|");
         Console.WriteLine("|".PadRight(64) + "|");
         Console.WriteLine("-----------------------------------------------------------------\n");
-        Console.Write("Escolha a opção que deseja editar no contato selecionado: ");
+        Console.Write("Escolha a formatação que deseja imprimir a lista de contatos: ");
         int option = int.Parse(Console.ReadLine());
         return option;
     }
@@ -306,5 +302,10 @@ internal class Program
                     break;
             }
         } while (op != 4);
+        /*
+        do
+        {
+            Console.WriteLine("Aperte ENTER para voltar ao MENU DE OPÇÕES");
+        } while (Console.ReadKey().Key != ConsoleKey.Enter);*/
     }
 }
