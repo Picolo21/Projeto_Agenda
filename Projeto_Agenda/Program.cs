@@ -263,15 +263,11 @@ internal class Program
                     string[] text = sr.ReadLine().Split(';');
                     phoneBooks.Add(new Contact(text[0], text[1], text[2], text[3], text[4], text[5], text[6], text[7]));
                 } while (!sr.EndOfStream);
-                do
+                Console.Clear();
+                foreach (Contact x in phoneBooks)
                 {
-                    Console.Clear();
-                    foreach (Contact x in phoneBooks)
-                    {
-                        Console.WriteLine(x.ToString());
-                    }
-                    Console.WriteLine("Aperter ENTER para voltar ao Menu de Impressão");
-                } while (Console.ReadKey().Key != ConsoleKey.Enter);
+                    Console.WriteLine(x.ToString());
+                }
             }
         }
     }
@@ -287,7 +283,11 @@ internal class Program
             switch (op)
             {
                 case 1:
-                    PrintAllContacts(pathContacts);
+                    do
+                    {
+                        PrintAllContacts(pathContacts);
+                        Console.WriteLine("Aperter ENTER para voltar ao Menu de Impressão");
+                    } while (Console.ReadKey().Key != ConsoleKey.Enter);
                     break;
                 case 2:
                     //PrintInAlphabeticalOrder();
@@ -302,10 +302,5 @@ internal class Program
                     break;
             }
         } while (op != 4);
-        /*
-        do
-        {
-            Console.WriteLine("Aperte ENTER para voltar ao MENU DE OPÇÕES");
-        } while (Console.ReadKey().Key != ConsoleKey.Enter);*/
     }
 }
