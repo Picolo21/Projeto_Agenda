@@ -54,14 +54,14 @@ internal class Program
                     phoneBook.Remove(RemoveContact(phoneBook, pathContacts));
                     break;
                 case 4:
-                    Print(phoneBook, pathContacts);
+
+                    break;
+                case 5:
+                    Print(pathContacts);
                     do
                     {
                         Console.WriteLine("Aperte ENTER para voltar ao MENU DE OPÇÕES");
                     } while (Console.ReadKey().Key != ConsoleKey.Enter);
-                    break;
-                case 5:
-
                     break;
                 case 6:
                     Exit();
@@ -94,7 +94,7 @@ internal class Program
     private static void EditContact(List<Contact> phoneBook, string pathContacts)
     {
         Console.Clear();
-        PrintAllContacts(phoneBook, pathContacts);
+        PrintAllContacts(pathContacts);
         Console.Write("Digite o nome do contato que deseja editar: ");
         string name = Console.ReadLine();
         Console.WriteLine();
@@ -152,7 +152,7 @@ internal class Program
     private static Contact RemoveContact(List<Contact> phoneBook, string pathContacts)
     {
         Console.Clear();
-        PrintAllContacts(phoneBook, pathContacts);
+        PrintAllContacts(pathContacts);
         Console.Write("Digite o nome do contato que deseja excluir: ");
         string name = Console.ReadLine();
         foreach (Contact x in phoneBook)
@@ -253,8 +253,10 @@ internal class Program
         }
     }
 
-    private static void PrintAllContacts(List<Contact> phoneBooks, string pathContacts)
+    private static List<Contact> PrintAllContacts(string pathContacts)
     {
+        List<Contact> phoneBooks = new List<Contact>();
+
         Console.Clear();
         if (File.Exists(pathContacts))
         {
@@ -263,28 +265,40 @@ internal class Program
                 do
                 {
                     string[] text = sr.ReadLine().Split(';');
-                    phoneBooks.Add(new Contact(text[0], text[1]));
+                    phoneBooks.Add(new Contact(text[0], text[1], text[2], text[3], text[4], text[5], text[6], text[7]));
                 } while (!sr.EndOfStream);
+                foreach (Contact x in phoneBooks)
+                {
+                    Console.WriteLine(x.ToString());
+                }
+                Console.ReadLine();
             }
         }
+        return phoneBooks;
     }
 
-    private static void Print(List<Contact> phoneBook, string pathContacts)
+    private static void Print(string pathContacts)
     {
+        List<Contact> phoneBooks = new List<Contact>();
         int op;
+
         do
         {
             op = PrintMenu();
             switch (op)
             {
                 case 1:
-                    PrintAllContacts(phoneBook, pathContacts);
+                    phoneBooks = PrintAllContacts(pathContacts);
+                    foreach (Contact x in phoneBooks)
+                    {
+                        Console.WriteLine(x.ToString());
+                    }
                     break;
                 case 2:
-                    PrintInAlphabeticalOrder(phoneBook);
+                    //PrintInAlphabeticalOrder();
                     break;
                 case 3:
-                    PrintPhoneBookByLetter(phoneBook);
+                    //PrintPhoneBookByLetter();
                     break;
                 case 4:
                     break;

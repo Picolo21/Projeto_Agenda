@@ -19,11 +19,7 @@
             Name = name;
             Phone = phone;
             Email = email;
-            LivesAt.Street = street;
-            LivesAt.City = city;
-            LivesAt.State = state;
-            LivesAt.PostalCode = postalCode;
-            LivesAt.Country = country;
+            LivesAt = new Address(street, city, state, postalCode, country);
         }
 
         public void EditAll()
